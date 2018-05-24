@@ -60,6 +60,7 @@
             [self.interactivePopTransition finishInteractiveTransition];
         }
         else {
+            //这里的cancel是动画结束时建议用[completeTransition:#!cancelled#]的原因
             [self.interactivePopTransition cancelInteractiveTransition];
         }
         
@@ -118,6 +119,7 @@
     [containerView addSubview:snapView];
     
     UITableViewCell* cell=toVc.selectedTableViewCell;
+    cell.imageView.hidden=YES;
     CGRect imgFrame=[cell.imageView convertRect:cell.imageView.bounds toView:containerView];
     
     [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
@@ -127,6 +129,7 @@
         [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
         [snapView removeFromSuperview];
         fromVc.imageView.hidden=NO;
+        cell.imageView.hidden=NO;
     }];
     
 }
